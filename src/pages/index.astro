@@ -1,0 +1,26 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Hero } from "../components/sections/Hero";
+
+import { Feature } from "../components/sections/Feature";
+import { FeatureGrid } from "../components/sections/FeatureGrid";
+import { LatestPosts } from "../components/sections/LatestPosts";
+
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog");
+
+const latestPosts = posts
+  .sort((a, b) => {
+    if (a.data.pubDate.valueOf() === b.data.pubDate.valueOf()) return 0;
+    return a.data.pubDate.valueOf() > b.data.pubDate.valueOf() ? -1 : 1;
+  })
+  .slice(0, 4);
+---
+
+<Layout>
+  <Hero client:load />
+  <Feature client:load />
+  <FeatureGrid client:load />
+  <LatestPosts latestPosts={latestPosts} client:load />
+</Layout>

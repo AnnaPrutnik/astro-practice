@@ -1,0 +1,72 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { Container } from "../../components/shared/Container";
+import { InteriorHero } from "../../components/shared/InteriorHero";
+import { Tag } from "../../components/shared/Tag";
+import { getPostColorFromCategory } from "../../utils/postsUtils";
+
+// import BlogPost from '../../layouts/BlogPost.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+type Props = CollectionEntry<"blog">;
+
+const post = Astro.props;
+const {
+  data: {
+    title,
+    description,
+    category,
+    author: { name, title: position, image },
+  },
+} = post;
+const { Content } = await post.render();
+---
+
+<!-- <BlogPost {...post.data}> -->
+<Layout>
+  <section class="relative overflow-x-clip py-24">
+    <Container>
+      <InteriorHero client:load />
+      <div class="flex justify-center">
+        <Tag color={getPostColorFromCategory(category)} text={category} />
+      </div>
+
+      <h1
+        class="font-heading font-black text-5xl text-center max-w-2xl mx-auto md:text-6xl lg:text-7xl"
+      >
+        {title}
+      </h1>
+      <p
+        class="text-center text-xl mt-6 text-zinc-400 md:text-2xl max-w-xl md:mx-auto"
+      >
+        {description}
+      </p>
+      <div class="flex flex-col items-center mt-8">
+        <div class="size-16 rounded-full bg-zinc-700"></div>
+        <p class="font-extrabold text-lg mt-3">
+          {name}
+        </p>
+        <p class="text-zinc-500">{position}</p>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-30 -mt-30 backdrop-blur-md">
+    <Container>
+      <article
+        class="prose prose-invert prose-large mx-auto prose-zinc prose-headings:font-heading prose-headings:font-black prose-h2:text-3xl prose-h2:md:text-5xl prose-h3:text-4xl"
+      >
+        <Content />
+      </article>
+    </Container>
+  </section>
+</Layout>
+
+<!-- </BlogPost> -->

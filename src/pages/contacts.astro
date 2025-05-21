@@ -1,0 +1,68 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Container } from "../components/shared/Container";
+import { InteriorHero } from "../components/shared/InteriorHero";
+import { CutCornerButton } from "../components/shared/CutCornerButton";
+import { CornerIcon } from "../components/icons/CornerIcon";
+---
+
+<Layout>
+  <section class="relative overflow-x-clip py-40">
+    <Container>
+      <InteriorHero client:load />
+      <div>
+        <p
+          class="uppercase font-extrabold text-center text-zinc-500 tracking-wider"
+        >
+          Lets's talk
+        </p>
+        <h1
+          class="font-heading font-black text-5xl text-center max-w-2xl mx-auto md:text-6xl lg:text-7xl mt-2"
+        >
+          Contact Us
+        </h1>
+        <p
+          class="text-center text-xl mt-6 text-zinc-400 md:text-2xl max-w-xl md:mx-auto"
+        >
+          We're here to help and answer any questions you may have. Reach out to
+          us to learn more about out services, get support, or to apply
+          positions.
+        </p>
+      </div>
+    </Container>
+  </section>
+  <section class="py-20 -mt-5 backdrop-blur-md">
+    <Container>
+      <div class="max-w-2xl mx-auto">
+        <h2 class="font-heading font-black text-3xl md:text-4xl">
+          What can we help you with?
+        </h2>
+        <form action="" class="flex flex-col mt-8">
+          <label for="name">Name </label>
+          <div class="relative w-full mt-2 group">
+            <div class="input-border"></div>
+            <CornerIcon />
+            <input type="text" name="name" id="name" class="input h-12" />
+          </div>
+
+          <label for="email" class="mt-4">Email </label>
+          <div class="relative w-full mt-2 group">
+            <div class="input-border"></div>
+            <CornerIcon />
+            <input type="text" name="email" id="email" class="input h-12" />
+          </div>
+
+          <label for="message" class="mt-4">Message</label>
+          <div class="relative w-full mb-4 mt-2 group">
+            <div class="input-border"></div>
+            <CornerIcon />
+            <textarea name="message" id="message" class="input" rows={4}
+            ></textarea>
+          </div>
+
+          <CutCornerButton title="send message" url="#" />
+        </form>
+      </div>
+    </Container>
+  </section>
+</Layout>

@@ -1,0 +1,25 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+import { Container } from "../../components/shared/Container";
+
+import { HeroBlog } from "../../components/sections/HeroBlog";
+import { BlogList } from "../../components/shared/BlogList";
+
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const latestPost = posts[0];
+---
+
+<Layout>
+  <HeroBlog client:load latestPost={latestPost} />
+  <section class="py-32 bg-zinc-900/30 backdrop-blur-sm -mt-16 md:-mt-32">
+    <Container>
+      <BlogList client:load list={posts} />
+    </Container>
+  </section>
+</Layout>

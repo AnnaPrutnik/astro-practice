@@ -1,0 +1,57 @@
+@import "tailwindcss";
+@plugin '@tailwindcss/typography';
+
+@theme {
+  /* breakpoints */
+  --breakpoint-sm: 375px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1200px;
+
+  /* fonts */
+  --font-heading: "Inter", "sans serif";
+  --font-body: "Karla", "sans serif";
+
+  /* colors */
+  --color-button: #3d1f40;
+
+  --border-size: 2px;
+  --edge-size: 10px;
+}
+
+@layer base {
+  body {
+    @apply antialiased bg-zinc-900 text-zinc-300 font-body;
+  }
+}
+
+@layer components {
+  .cut-corner-btn {
+    clip-path: polygon(
+      calc(100% - var(--edge-size)) 0,
+      100% var(--edge-size),
+      100% 100%,
+      0 100%,
+      0 0
+    );
+  }
+
+  .cut-corner-btn::after {
+    clip-path: polygon(
+      calc(100% - var(--edge-size) - var(--border-size) * 0.7)
+        var(--border-size),
+      calc(100% - var(--border-size))
+        calc(var(--edge-size) + var(--border-size) * 0.7),
+      calc(100% - var(--border-size)) calc(100% - var(--border-size)),
+      var(--border-size) calc(100% - var(--border-size)),
+      var(--border-size) var(--border-size)
+    );
+  }
+
+  .input {
+    @apply bg-transparent w-full relative z-10 block focus:outline-none px-4 py-2;
+  }
+
+  .input-border {
+    @apply absolute inset-0 outline-2 -outline-offset-2 group-focus-within:outline-fuchsia-500 [mask-image:linear-gradient(225deg,transparent,transparent_10px,black_10px)] -z-1 outline-zinc-700;
+  }
+}

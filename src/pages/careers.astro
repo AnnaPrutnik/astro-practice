@@ -1,0 +1,36 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Container } from "../components/shared/Container";
+import { InteriorHero } from "../components/shared/InteriorHero";
+import { getCollection } from "astro:content";
+import { PositionsGrid } from "../components/sections/PositionsGrid";
+
+const positions = await getCollection("positions");
+---
+
+<Layout>
+  <section class="relative overflow-x-clip py-40">
+    <Container>
+      <InteriorHero client:load />
+      <div>
+        <p
+          class="uppercase font-extrabold text-center text-zinc-500 tracking-wider"
+        >
+          Join the team
+        </p>
+        <h1
+          class="font-heading font-black text-5xl text-center max-w-2xl mx-auto md:text-6xl lg:text-7xl mt-2"
+        >
+          We are hiring
+        </h1>
+        <p
+          class="text-center text-xl mt-6 text-zinc-400 md:text-2xl max-w-xl md:mx-auto"
+        >
+          We are always looking for talented individuals passionate about
+          building blockchain products that make a difference.
+        </p>
+      </div>
+    </Container>
+  </section>
+  <PositionsGrid lists={positions} client:load />
+</Layout>
