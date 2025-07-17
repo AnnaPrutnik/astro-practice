@@ -4,6 +4,7 @@ import { Header } from "../components/sections/Header";
 import { Testimonials } from "../components/sections/Testimonials";
 import { CTA } from "../components/sections/CTA";
 import { Footer } from "../components/sections/Footer";
+import GA from "../components/shared/GA.astro";
 ---
 
 <!doctype html>
@@ -18,6 +19,7 @@ import { Footer } from "../components/sections/Footer";
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
       rel="stylesheet"
     />
+    <GA />
   </head>
   <body>
     <Header client:load />

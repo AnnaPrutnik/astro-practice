@@ -1,0 +1,26 @@
+---
+const gaID = import.meta.env.PUBLIC_GA_ID;
+---
+
+<script
+  is:inline
+  type="text/partytown"
+  src=`https://www.googletagmanager.com/gtag/js?id=${gaID}`></script>
+
+<script is:inline type="text/partytown">
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  // this settings allow collect only anonymous data
+  gtag("consent", "default", {
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    analytics_storage: "denied",
+  });
+
+  gtag("config", gaID);
+</script>
